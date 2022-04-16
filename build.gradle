@@ -1,0 +1,55 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.6'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.project'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation("io.springfox:springfox-swagger2:2.9.2")
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation group: 'org.hibernate', name: 'hibernate-validator', version: '7.0.4.Final'
+	implementation 'org.passay:passay:1.6.0'
+	implementation 'org.redisson:redisson:3.12.1'
+	implementation group: 'io.vavr', name: 'vavr', version: '0.9.0'
+	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '2.2.6.RELEASE'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'mysql:mysql-connector-java'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+test {
+	useJUnitPlatform()
+}
+
+def jacocoExclude = [
+		'**/dto/**',
+		'**/entity/*',
+		'**/exception/*',
+		'**/repository/*',
+		'**/tool/*',
+		'**/util/*',
+		'/*UniTechApplication.class']
